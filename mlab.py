@@ -1,9 +1,9 @@
 import mongoengine
 
-# mongodb://<dbuser>:<dbpassword>@ds121980.mlab.com:21980/a7-dummy
-host = "ds121980.mlab.com"
-port = 21980
-db_name = "a7-dummy"
+# mongodb://<dbuser>:<dbpassword>@ds147534.mlab.com:47534/qrcode_db
+host = "ds147534.mlab.com"
+port = 47534
+db_name = "qrcode_db"
 username = "admin"
 password = "admin"
 
