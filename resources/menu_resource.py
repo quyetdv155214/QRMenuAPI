@@ -15,7 +15,15 @@ class MenuRes(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument(name="menu_id", type=str, location="json")
         parser.add_argument(name="menu_name", type=str, location="json")
-        parser.add_argument(name="menu_category", type=str, location="json", action='append')
+        parser.add_argument(name="menu_categories", type=str, location="json", action='append')
+
+        body = parser.parse_args()
+
+        menu_id = body["menu_id"]
+        menu_name = body["menu_name"]
+        menu_categories = body["menu_categories"]
+        menu.update(menu_id=menu_id, menu_name=menu_name, menu_categories=menu_categories)
+        return {""}
 
     def delete(self, menu_id):
         try:
@@ -30,24 +38,28 @@ class MenuRes(Resource):
 
 
 class MenuLisRes(Resource):
+    # get all menu
     def get(self):
         menu = Menu.objects()
+        if menu is None:
+            return {"message":"menu is null"}
         menu_json = mlab.list2json(menu)
         return menu_json
 
+    # add menu
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument(name="menu_id", type=str, location="json")
         parser.add_argument(name="menu_name", type=str, location="json")
-        parser.add_argument(name="menu_category", type=str, location="json", action='append')
+        parser.add_argument(name="menu_categories", type=str, location="json", action='append')
 
         body = parser.parse_args()
 
         menu_id = body["menu_id"]
         menu_name = body["menu_name"]
-        menu_category = body["menu_category"]
+        menu_categories = body["menu_categories"]
 
-        menu = Menu(menu_id=menu_id, menu_name=menu_name, menu_category=menu_category)
+        menu = Menu(menu_id=menu_id, menu_name=menu_name, menu_categories=menu_categories)
 
         menu.save()
 
