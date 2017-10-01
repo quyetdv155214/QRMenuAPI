@@ -22,9 +22,11 @@ api = Api(app)
 
 
 # api.add_resource(MenuRes, "/menu")
-api.add_resource(MenuRes, "/menu/<menu_id>")
-api.add_resource(MenuLisRes, "/menu")
+api.add_resource(MenuWithID, "/menu_id/<menu_id>")
+api.add_resource(Menus, "/menu")
 api.add_resource(RestaurantRes, "/restaurant")
+api.add_resource(MenuWithResID, "/menu_res/<res_id>")
+
 
 if __name__ == '__main__':
     app.run()

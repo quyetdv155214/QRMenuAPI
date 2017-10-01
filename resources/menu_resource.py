@@ -8,7 +8,7 @@ from flask import jsonify
 import mlab
 
 
-class MenuRes(Resource):
+class MenuWithID(Resource):
     def get(self, menu_id):
         try:
             menu = Menu.objects().with_id(menu_id)
@@ -46,11 +46,11 @@ class MenuRes(Resource):
         curent_menus = Menu.objects()
         # check exit id
         for m in curent_menus:
-            c_res_id = m["res_id"]
+            # c_res_id = m["res_id"]
             c_menu_id = m["menu_id"]
-            if res_id == c_res_id:
-                mess = {"message": "Restaurant id is exited"}
-                return RespHandle.get_resp(mess=mess, code=400)
+            # if res_id == c_res_id:
+            #     mess = {"message": "Restaurant id is exited"}
+            #     return RespHandle.get_resp(mess=mess, code=400)
 
             if menu_id == c_menu_id:
                 mess = {"message": "Menu id is exited"}
@@ -78,7 +78,7 @@ class MenuRes(Resource):
             return RespHandle.get_resp(mess=mess, code=200)
 
 
-class MenuLisRes(Resource):
+class Menus(Resource):
     # get all menu
     def get(self):
         menu = Menu.objects()
@@ -116,11 +116,8 @@ class MenuLisRes(Resource):
 
         # check exit id
         for m in curent_menus:
-            c_res_id = m["res_id"]
+            # c_res_id = m["res_id"]
             c_menu_id = m["menu_id"]
-            if res_id == c_res_id:
-                mess = {"message": "Restaurant id is exited"}
-                return RespHandle.get_resp(mess=mess, code=400)
 
             if menu_id == c_menu_id:
                 mess = {"message": "Menu id is exited"}
@@ -134,3 +131,20 @@ class MenuLisRes(Resource):
         resp = jsonify(mlab.item2json(added_menu))
         resp.status_code = 200
         return mlab.item2json(added_menu)
+
+
+class MenuWithResID(Resource):
+    # get all menu with res id
+
+    def get(self, res_id):
+        menus = Menu.objects(res_id=res_id)
+        return mlab.list2json(menus), 200
+
+    # del all menu with res id
+
+    def delete(self, res_id):
+        menus = Menu.objects(res_id=res_id)
+        for menu in menus:
+            menu.delete()
+        return {"message":"del all menu"},200
+
