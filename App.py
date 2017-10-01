@@ -2,6 +2,7 @@ from flask import Flask
 import mlab
 from flask_restful import Api
 from resources.menu_resource import *
+from resources.category_resource import *
 from resources.restaurant_resource import *
 mlab.connect()
 app = Flask(__name__)
@@ -26,6 +27,7 @@ api.add_resource(MenuWithID, "/menu_id/<menu_id>")
 api.add_resource(Menus, "/menu")
 api.add_resource(RestaurantRes, "/restaurant")
 api.add_resource(MenuWithResID, "/menu_res/<res_id>")
+api.add_resource(CategoryRes, "/category")
 
 
 if __name__ == '__main__':

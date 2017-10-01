@@ -93,7 +93,7 @@ class Menus(Resource):
         parser.add_argument(name="res_id", type=str, location="json")
         parser.add_argument(name="menu_id", type=str, location="json")
         parser.add_argument(name="menu_name", type=str, location="json")
-        parser.add_argument(name="date_create", type=str, location="json")
+        # parser.add_argument(name="date_create", type=str, location="json")
         parser.add_argument(name="describe", type=str, location="json")
 
         # parse body
@@ -102,7 +102,7 @@ class Menus(Resource):
         res_id = body["res_id"]
         menu_id = body["menu_id"]
         menu_name = body["menu_name"]
-        date_create = datetime.strptime(body["date_create"], "%d/%m/%y")  # "21/11/06 16:30", "%d/%m/%y %H:%M"
+        date_create = datetime.today().strftime('%d-%m-%Y')
         describe = body["describe"]
 
         curent_menus = Menu.objects()
