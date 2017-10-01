@@ -28,6 +28,7 @@ api.add_resource(Menus, "/menu")
 api.add_resource(RestaurantRes, "/restaurant")
 api.add_resource(MenuWithResID, "/menu_res/<res_id>")
 api.add_resource(CategoryRes, "/category")
+api.add_resource(CateoryWithID, "/category_id/<cate_id>")
 
 
 if __name__ == '__main__':
