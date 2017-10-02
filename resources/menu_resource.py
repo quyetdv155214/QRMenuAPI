@@ -41,7 +41,7 @@ class MenuWithID(Resource):
             return RespHandle.get_resp(mess=mess, code=400)
         if menu_id is None:
             mess = {"message": "Menu id is required"}
-            return RespHandle.get_resp(mess=mess, code=400)
+            return RespHandle.get_resp(mess=mess, cohehe=400)
 
         curent_menus = Menu.objects()
         # check exit id

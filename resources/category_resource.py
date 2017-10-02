@@ -79,4 +79,15 @@ class CateoryWithID(Resource):
         return mlab.item2json(Categoty.objects().with_id(category.id))
 
 
+class CategoryWithMenu(Resource):
+    def get(self, menu_id):
+        try:
+            categorys = Categoty.objects(menu_id=menu_id)
+        except Exception:
+            return {'message': "this menu id is wrong"}, 404
+
+        return mlab.list2json(categorys), 200
+
+
+
 
