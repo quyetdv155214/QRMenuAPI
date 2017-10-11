@@ -17,6 +17,7 @@ class ItemRes(Resource):
     def post(self):
         parser = reqparse.RequestParser()
 
+        parser.add_argument(name="menu_id", type=str, location='json')
         parser.add_argument(name="cate_id", type=str, location='json')
         parser.add_argument(name="item_id", type=str, location='json')
         parser.add_argument(name="item_name", type=str, location='json')
@@ -28,6 +29,7 @@ class ItemRes(Resource):
 
         body = parser.parse_args()
 
+        menu_id = body["menu_id"]
         cate_id = body["cate_id"]
         item_id = body["item_id"]
         item_name = body["item_name"]
@@ -50,9 +52,7 @@ class ItemRes(Resource):
             if c["item_id"] == item_id:
                 return {"message": "Item id exited"}, 400
 
-
-
-        item = Item(cate_id=cate_id, item_id=item_id, item_name=item_name, item_price=item_price,
+        item = Item(menu_id=menu_id, cate_id=cate_id, item_id=item_id, item_name=item_name, item_price=item_price,
                     item_discount=item_discount, item_desc=item_desc, item_images_url=item_images_url)
         item.save()
 
@@ -70,7 +70,7 @@ class ItemWithID(Resource):
             return {"message": "Item id not exit"}, 400
         if item is None:
             return {"message": "Item id not exit"}, 400
-        return mlab.item2json(item)
+        return item.get_json()
     def put(self, item_id):
         try:
             item = Item.objects().with_id(item_id)
@@ -80,6 +80,7 @@ class ItemWithID(Resource):
             return {"message": "Item id not exit"}, 400
         parser = reqparse.RequestParser()
 
+        parser.add_argument(name="menu_id", type=str, location='json')
         parser.add_argument(name="cate_id", type=str, location='json')
         parser.add_argument(name="item_id", type=str, location='json')
         parser.add_argument(name="item_name", type=str, location='json')
@@ -91,6 +92,7 @@ class ItemWithID(Resource):
 
         body = parser.parse_args()
 
+        menu_id = body["menu_id"]
         cate_id = body["cate_id"]
         item_id = body["item_id"]
         item_name = body["item_name"]
@@ -99,7 +101,7 @@ class ItemWithID(Resource):
         item_desc = body["item_desc"]
         item_images_url = body["item_images_url"]
 
-        item.update(set__cate_id=cate_id, set__item_name=item_name, set__item_price=item_price,
+        item.update(set__menu_id=menu_id, set__cate_id=cate_id, set__item_name=item_name, set__item_price=item_price,
                     set__item_discount=item_discount, set__item_desc=item_desc, set__item_images_url=item_images_url)
 
         added_item = Item.objects().with_id(item.id)

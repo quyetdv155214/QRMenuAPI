@@ -7,3 +7,6 @@ class Restaurant(Document):
     res_type = ListField(field=StringField)
     # describe = EmbeddedDocumentListField(RestauranInfo)
     view_count = IntField(default=0, min_value=0)
+
+    def get_json(self):
+        return mlab.item2json(self)

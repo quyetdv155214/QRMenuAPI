@@ -1,4 +1,6 @@
 from mongoengine import *
+
+import mlab
 from model import *
 
 
@@ -8,3 +10,6 @@ class Categoty(Document):
     cate_name = StringField(max_length=200, min_length=1, required=True)
     cate_type = StringField()
     cate_order = IntField(min_value=1, default=1)
+
+    def get_json(self):
+        return mlab.item2json(self)
