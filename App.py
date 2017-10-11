@@ -33,6 +33,7 @@ api.add_resource(CateoryWithID, "/category_id/<cate_id>")
 api.add_resource(CategoryWithMenu, "/category_menu_id/<menu_id>")
 api.add_resource(ItemRes, "/item")
 api.add_resource(ItemWithID, "/item/<item_id>")
+api.add_resource(ItemWithMenuId, "/item_menu/<menu_id>")
 
 
 if __name__ == '__main__':

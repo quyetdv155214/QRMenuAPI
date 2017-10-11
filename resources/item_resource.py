@@ -120,6 +120,14 @@ class ItemWithID(Resource):
         return {"message": "deleted item"}
 
 
+class ItemWithMenuId(Resource):
+
+    def get(self, menu_id):
+        items = Item.objects(menu_id=menu_id)
+        return mlab.list2json(items)
+
+
+
 
 
 

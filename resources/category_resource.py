@@ -5,6 +5,8 @@ from model.category import Categoty
 import mlab
 from datetime import datetime
 
+from util.resp_handle import RespHandle
+
 
 class CategoryRes(Resource):
     def get(self):
@@ -19,6 +21,7 @@ class CategoryRes(Resource):
         parser.add_argument(name="cate_name", type=str, location='json')
         parser.add_argument(name="cate_type", type=str, location='json')
         parser.add_argument(name="cate_order", type=int, location='json')
+        parser.add_argument(name="items", type=list, location='json')
 
         body = parser.parse_args()
 
@@ -27,8 +30,20 @@ class CategoryRes(Resource):
         cate_name = body["cate_name"]
         cate_type = body["cate_type"]
         cate_order = body["cate_order"]
+        items = body["items"]
 
-        cate = Categoty(menu_id=menu_id, cate_id=cate_id,
+        if cate_id is None:
+            mess = {"message": "cate_id id is required"}
+            return RespHandle.get_resp(mess=mess, code=400)
+
+        cur_cate = Categoty.objects()
+        for c in cur_cate:
+            c_cate_id = c["cate_id"]
+            if cate_id == c_cate_id:
+                mess = {"message": "Cate id is exited"}
+                return RespHandle.get_resp(mess=mess, code=400)
+
+        cate = Categoty(items=items, menu_id=menu_id, cate_id=cate_id,
                         cate_name=cate_name, cate_type=cate_type, cate_order=cate_order)
         cate.save()
         # added_cate = Categoty.objects().with_id(cate.id)
@@ -47,17 +62,20 @@ class CateoryWithID(Resource):
     # get category with cate_id
     def get(self, cate_id):
         try:
-            category = Categoty.objects().with_id(cate_id)
-        except Exception:
-            return {'message':"this id is wrong"}, 404
+            category = Categoty.objects(cate_id=cate_id).first()
+            items = Item.objects(cate_id=cate_id)
+            category.items = items
 
-        return mlab.item2json(category)
+        except Exception:
+            return {'message': "this id is wrong"}, 404
+
+        return category.get_json()
 
     def put(self, cate_id):
         try:
             category = Categoty.objects().with_id(cate_id)
         except Exception:
-            return {'message':"this id is wrong"}, 404
+            return {'message': "this id is wrong"}, 404
 
         parser = reqparse.RequestParser()
         parser.add_argument(name="menu_id", type=str, location='json')
@@ -87,7 +105,3 @@ class CategoryWithMenu(Resource):
             return {'message': "this menu id is wrong"}, 404
 
         return mlab.list2json(categorys), 200
-
-
-
-
