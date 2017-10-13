@@ -13,7 +13,6 @@ class RestaurantRes(Resource):
         restaurants = Restaurant.objects()
         if not restaurants:
             message = {"message": "No restaurant found"}
-
             resp = jsonify(message)
             resp.status_code = 200
         else:

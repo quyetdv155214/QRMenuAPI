@@ -9,6 +9,7 @@ import mlab
 
 
 class MenuWithID(Resource):
+
     def get(self, menu_id):
         try:
             menu = Menu.objects(menu_id=menu_id).first()

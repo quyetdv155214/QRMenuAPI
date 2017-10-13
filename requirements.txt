@@ -3,7 +3,8 @@
 # ----------------------
 flask
 flask-restful
-
+flask-jwt
+pyfcm
 
 # ----------------------
 # Testing
@@ -22,3 +23,6 @@ mongoengine
 # Other
 # ----------------------
 youtube-dl
+Django==1.10.6
+responses==0.3
+requests>=2.6.0
