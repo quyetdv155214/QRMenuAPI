@@ -17,10 +17,16 @@ class MenuWithID(Resource):
             # items = Item.objects(menu_id=menu_id)
             items = Item.objects(menu_id=menu_id)
 
-            menu.categories = categories
+            # temp_cates =[]
+
             for cate in categories:
-                cate
-            menu.items = items
+                for item in items:
+                    if item.cate_id == cate.cate_id:
+                        cate.items.append(item)
+
+            menu.categories = categories
+
+            # menu.items = items
 
         except Exception:
             mess = {"message": "menu id not exit"}
