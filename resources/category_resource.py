@@ -51,11 +51,7 @@ class CategoryRes(Resource):
         return {"message": "add success"}, 200
 
     # delete all category
-    def delete(self):
-        cates = Categoty.objects()
-        for cate in cates:
-            cate.delete()
-        return {"message": "delete all category"}, 200
+
 
 
 class CateoryWithID(Resource):
@@ -96,6 +92,13 @@ class CateoryWithID(Resource):
                         set__cate_name=cate_name, set__cate_type=cate_type, set__cate_order=cate_order)
         return mlab.item2json(Categoty.objects().with_id(category.id))
 
+    def delete(self, cate_id):
+        try:
+            cate = Categoty.objects(cate_id=cate_id)
+            cate.delete()
+        except Exception:
+            return {'message': "category not exit"}, 404
+        return {"message": "delete success category"}, 200
 
 class CategoryWithMenu(Resource):
     def get(self, menu_id):
