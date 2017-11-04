@@ -22,7 +22,7 @@ class ItemRes(Resource):
         parser.add_argument(name="item_name", type=str, location='json')
         parser.add_argument(name="item_price", type=float, location='json')
         # parser.add_argument(name="item_discount", type=float, location='json')
-        parser.add_argument(name="item_discount", type=float, location='json')
+        # parser.add_argument(name="item_discount", type=float, location='json')
         parser.add_argument(name="item_desc", type=str, location='json')
         parser.add_argument(name="item_images_url", type=str, location='json', action='append')
         parser.add_argument(name="item_info", type=str, location='json')
