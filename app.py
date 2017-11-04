@@ -5,6 +5,7 @@ from resources.menu_resource import *
 from resources.category_resource import *
 from resources.restaurant_resource import *
 from resources.item_resource import *
+from resources.manager_acc_resource import *
 mlab.connect()
 app = Flask(__name__)
 
@@ -34,6 +35,10 @@ api.add_resource(CategoryWithMenu, "/category_menu_id/<menu_id>")
 api.add_resource(ItemRes, "/item")
 api.add_resource(ItemWithID, "/item/<item_id>")
 api.add_resource(ItemWithMenuId, "/item_menu/<menu_id>")
+api.add_resource(ViewCount, "/itemview/<item_id>")
+api.add_resource(ManagerLogin, "/mlogin")
+api.add_resource(ManagerRegister, "/mRegister")
+
 
 
 if __name__ == '__main__':
