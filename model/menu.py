@@ -11,10 +11,12 @@ class Menu(Document):
     menu_name = StringField()
     date_create = StringField(required=False)
     describe = StringField(max_length=500)
+    menu_pic = StringField()
     # list category
     categories = ListField(ReferenceField(Categoty))
     # list item
     items = ListField(ReferenceField(Item))
+
 
     def get_json(self):
         str = mlab.item2json(self)

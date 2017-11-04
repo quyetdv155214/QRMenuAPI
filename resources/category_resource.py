@@ -73,7 +73,7 @@ class CateoryWithID(Resource):
 
     def put(self, cate_id):
         try:
-            category = Categoty.objects().with_id(cate_id)
+            category = Categoty.objects(cate_id=cate_id).first()
         except Exception:
             return {'message': "this id is wrong"}, 404
 

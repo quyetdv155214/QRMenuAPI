@@ -42,6 +42,7 @@ class MenuWithID(Resource):
         # parser.add_argument(name="menu_id", type=str, location="json")
         parser.add_argument(name="menu_name", type=str, location="json")
         parser.add_argument(name="describe", type=str, location="json")
+        parser.add_argument(name="menu_pic", type=str, location="json")
         # parse body
         body = parser.parse_args()
         # getdata from body
@@ -50,6 +51,7 @@ class MenuWithID(Resource):
         menu_name = body["menu_name"]
         # date_create = menu["date_create"]
         describe = body["describe"]
+        menu_pic = body["menu_pic"]
 
         # check require field
         # if res_id is None:
@@ -72,7 +74,7 @@ class MenuWithID(Resource):
         #     mess = {"message": "Menu id is exited"}
         #     return RespHandle.get_resp(mess=mess, code=400)
 
-        menu.update(set__menu_name=menu_name, set__describe=describe)
+        menu.update(menu_pic=menu_pic,set__menu_name=menu_name, set__describe=describe)
 
         edited_menu = Menu.objects().with_id(menu.id)
         resp = jsonify(mlab.item2json(edited_menu))
@@ -111,6 +113,7 @@ class Menus(Resource):
         parser.add_argument(name="menu_name", type=str, location="json")
         parser.add_argument(name="date_create", type=str, location="json")
         parser.add_argument(name="describe", type=str, location="json")
+        parser.add_argument(name="menu_pic", type=str, location="json")
         parser.add_argument(name="categories", type=list, location="json")
         parser.add_argument(name="items", type=list, location="json")
 
@@ -122,6 +125,7 @@ class Menus(Resource):
         menu_name = body["menu_name"]
         date_create = body["date_create"]
         describe = body["describe"]
+        menu_pic = body["menu_pic"]
         categories = body["categories"]
         items = body["items"]
 
@@ -144,7 +148,7 @@ class Menus(Resource):
                 return RespHandle.get_resp(mess=mess, code=400)
 
         menu = Menu(res_id=res_id, menu_id=menu_id, menu_name=menu_name, date_create=date_create, describe=describe,
-                    categories=categories, items=items)
+                    menu_pic=menu_pic,categories=categories, items=items)
 
         menu.save()
 
