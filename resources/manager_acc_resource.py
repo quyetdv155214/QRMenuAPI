@@ -22,7 +22,7 @@ class ManagerLogin(Resource):
                 return {"access_token" : m.get_token}, 200
         return {"message" : "email or password was wrong"},404
 
-class ManagerRegister(Resource) :
+class ManagerRegister(Resource):
 
     def post(self):
         parser = reqparse.RequestParser()

@@ -9,7 +9,6 @@ import mlab
 
 
 class MenuWithID(Resource):
-
     def get(self, menu_id):
         try:
             menu = Menu.objects(menu_id=menu_id).first()
@@ -36,50 +35,23 @@ class MenuWithID(Resource):
     def put(self, menu_id):
         menu = Menu.objects(menu_id=menu_id).first()
         parser = reqparse.RequestParser()
-        # add argument
-        # parser.add_argument(name="res_id", type=str, location="json")
-        # khong cho edit menu id
-        # parser.add_argument(name="menu_id", type=str, location="json")
+
         parser.add_argument(name="menu_name", type=str, location="json")
         parser.add_argument(name="describe", type=str, location="json")
         parser.add_argument(name="menu_pic", type=str, location="json")
         # parse body
         body = parser.parse_args()
-        # getdata from body
-        # res_id = body["res_id"]
-        # menu_id = body["menu_id"]
+
         menu_name = body["menu_name"]
         # date_create = menu["date_create"]
         describe = body["describe"]
         menu_pic = body["menu_pic"]
 
-        # check require field
-        # if res_id is None:
-        #     mess = {"message": "Restaurant id is required"}
-        #     return RespHandle.get_resp(mess=mess, code=400)
-        # if menu_id is None:
-        #     mess = {"message": "Menu id is required"}
-        #     return RespHandle.get_resp(mess=mess, cohehe=400)
-
-        # curent_menus = Menu.objects()
-        # check exit id
-        # for m in curent_menus:
-        # c_res_id = m["res_id"]
-        # c_menu_id = m["menu_id"]
-        # if res_id == c_res_id:
-        #     mess = {"message": "Restaurant id is exited"}
-        #     return RespHandle.get_resp(mess=mess, code=400)
-
-        # if menu_id == c_menu_id:
-        #     mess = {"message": "Menu id is exited"}
-        #     return RespHandle.get_resp(mess=mess, code=400)
-
-        menu.update(menu_pic=menu_pic,set__menu_name=menu_name, set__describe=describe)
+        menu.update(set__menu_pic=menu_pic, set__menu_name=menu_name, set__describe=describe)
 
         edited_menu = Menu.objects().with_id(menu.id)
-        resp = jsonify(mlab.item2json(edited_menu))
-        resp.status_code = 200
-        return {resp}
+
+        return edited_menu, 200
 
     def delete(self, menu_id):
         try:
@@ -148,7 +120,7 @@ class Menus(Resource):
                 return RespHandle.get_resp(mess=mess, code=400)
 
         menu = Menu(res_id=res_id, menu_id=menu_id, menu_name=menu_name, date_create=date_create, describe=describe,
-                    menu_pic=menu_pic,categories=categories, items=items)
+                    menu_pic=menu_pic, categories=categories, items=items)
 
         menu.save()
 

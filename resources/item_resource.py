@@ -105,7 +105,7 @@ class ItemWithID(Resource):
         item_images_url = body["item_images_url"]
 
         item.update(set__menu_id=menu_id, set__cate_id=cate_id, set__item_name=item_name, set__item_price=item_price,
-                    set_item_old_price=item_old_price, item_info=item_info,
+                    set__item_old_price=item_old_price, set__item_info=item_info,
                     set__item_desc=item_desc, set__item_images_url=item_images_url)
 
         added_item = Item.objects().with_id(item.id)
