@@ -1,29 +1,19 @@
 from mongoengine import *
 
 import mlab
-from model.menu import Menu
 
-
-class User(Document):
-    id_user = StringField()
-    name = StringField()
-    address = StringField()
-    phone_number = StringField()
+class manager:
+    manager_id = StringField()
+    manager_name = StringField()
     email = StringField()
     password = StringField()
-    urlPic = StringField()
     token = StringField()
-    save_menus = ListField(ReferenceField(Menu))
-
     def get_json(self):
         return {
-            "id_user": self.id_user,
-            "name": self.name,
-            "address": self.address,
-            "phone_number": self.phone_number,
+            "manager_id": self.manager_id,
+            "manager_name": self.manager_name,
             "email": self.email,
             "password": self.password,
-            "urlPic": self.urlPic,
             "token": self.token,
         }
 

@@ -65,7 +65,7 @@ class ItemWithID(Resource):
 
     def get(self, item_id):
         try:
-            item = Item.objects().with_id(item_id)
+            item = Item.objects(item_id=item_id).first()
         except Exception:
             return {"message": "Item id not exit"}, 400
         if item is None:
@@ -110,7 +110,7 @@ class ItemWithID(Resource):
 
     def delete(self, item_id):
         try:
-            item = Item.objects().with_id(item_id)
+            item = Item.objects(item_id=item_id).first()
         except Exception:
             return {"message": "Item id not exit"}, 400
         if item is None:
