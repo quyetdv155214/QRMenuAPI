@@ -2,11 +2,11 @@ from flask_restful import Resource, reqparse
 
 from model.manager_acc import *
 
-
 import mlab
 
+
 class ManagerLogin(Resource):
-    #login
+    # login
     def post(self):
 
         parser = reqparse.RequestParser()
@@ -19,13 +19,11 @@ class ManagerLogin(Resource):
         manager = Manager.objects()
         for m in manager:
             if m.email == email and m.password == password:
-                return {"manager id" : m.manager_id}, 200
-        return {"message" : "email or password was wrong"},404
-
+                return {"manager id": m.manager_id}, 200
+        return {"message": "email or password was wrong"}, 404
 
 
 class ManagerRegister(Resource):
-
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument(name="email", type=str, location='json')
