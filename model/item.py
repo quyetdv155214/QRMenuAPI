@@ -9,8 +9,11 @@ class Item(Document):
     item_id = StringField(unique=True, required=True)
     item_name = StringField()
     item_price = FloatField(min_value=0, default=0)
+    item_old_price = FloatField(min_value=0, default=item_price)
     item_discount = FloatField(min_value=0, max_value=100, default=0)
     item_desc = StringField()
+    item_view_count = IntField(default=0)
+    item_info = StringField()
     item_images_url = ListField()
 
     def get_json(self):
