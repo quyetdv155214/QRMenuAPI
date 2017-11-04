@@ -28,6 +28,7 @@ class Menu(Document):
             "menu_name": self.menu_name,
             "date_create": self.date_create,
             "describe": self.describe,
+            "menu_pic": self.menu_pic,
             "categories": [cate.get_json() for cate in self.categories],
             "items": [item.get_json() for item in self.items]
         }
