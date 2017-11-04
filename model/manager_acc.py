@@ -2,7 +2,7 @@ from mongoengine import *
 
 import mlab
 
-class Manager:
+class Manager(Document):
     manager_id = StringField()
     manager_name = StringField()
     email = StringField()
