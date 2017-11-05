@@ -80,7 +80,7 @@ class Menus(Resource):
     # add menu
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument(name="res_id", type=str, location="json")
+        parser.add_argument(name="manager_id", type=str, location="json")
         parser.add_argument(name="menu_id", type=str, location="json")
         parser.add_argument(name="menu_name", type=str, location="json")
         parser.add_argument(name="date_create", type=str, location="json")
@@ -92,7 +92,7 @@ class Menus(Resource):
         # parse body
         body = parser.parse_args()
         # getdata from body
-        res_id = body["res_id"]
+        manager_id = body["manager_id"]
         menu_id = body["menu_id"]
         menu_name = body["menu_name"]
         date_create = body["date_create"]
@@ -103,7 +103,7 @@ class Menus(Resource):
 
         curent_menus = Menu.objects()
         # check require field
-        if res_id is None:
+        if manager_id is None:
             mess = {"message": "Restaurant id is required"}
             return RespHandle.get_resp(mess=mess, code=400)
         if menu_id is None:
@@ -112,14 +112,14 @@ class Menus(Resource):
 
         # check exit id
         for m in curent_menus:
-            # c_res_id = m["res_id"]
+
             c_menu_id = m["menu_id"]
 
             if menu_id == c_menu_id:
                 mess = {"message": "Menu id is exited"}
                 return RespHandle.get_resp(mess=mess, code=400)
 
-        menu = Menu(res_id=res_id, menu_id=menu_id, menu_name=menu_name, date_create=date_create, describe=describe,
+        menu = Menu(manager_id=manager_id, menu_id=menu_id, menu_name=menu_name, date_create=date_create, describe=describe,
                     menu_pic=menu_pic, categories=categories, items=items)
 
         menu.save()
@@ -130,17 +130,17 @@ class Menus(Resource):
         return added_menu.get_json()
 
 
-class MenuWithResID(Resource):
+class MenuWithMangerID(Resource):
     # get all menu with res id
 
-    def get(self, res_id):
-        menus = Menu.objects(res_id=res_id)
+    def get(self, manager_id):
+        menus = Menu.objects(manager_id=manager_id)
         return mlab.list2json(menus), 200
 
     # del all menu with res id
 
-    def delete(self, res_id):
-        menus = Menu.objects(res_id=res_id)
+    def delete(self, manager_id):
+        menus = Menu.objects(manager_id=manager_id)
         for menu in menus:
             menu.delete()
         return {"message": "del all menu"}, 200

@@ -38,6 +38,8 @@ class ManagerRegister(Resource):
         manager_id = body["manager_id"]
         manager_name = body["manager_id"]
 
+
+
         manager = Manager(email=email, password=password, manager_id=manager_id, manager_name=manager_name)
         manager.save()
 

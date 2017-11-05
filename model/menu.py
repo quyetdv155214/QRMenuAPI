@@ -6,7 +6,7 @@ from model.item import Item
 
 
 class Menu(Document):
-    res_id = StringField(max_length=100, min_length=3, required=True)
+    manager_id = StringField(max_length=100, min_length=3, required=True)
     menu_id = StringField(max_length=100, min_length=3, unique=True, required=True)
     menu_name = StringField()
     date_create = StringField(required=False)
@@ -23,7 +23,7 @@ class Menu(Document):
         oid = str["_id"]["$oid"]
         return {
             "id_data": oid,
-            "res_id": self.res_id,
+            "manager_id": self.res_id,
             "menu_id": self.menu_id,
             "menu_name": self.menu_name,
             "date_create": self.date_create,
