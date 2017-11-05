@@ -19,7 +19,7 @@ class ManagerLogin(Resource):
         manager = Manager.objects()
         for m in manager:
             if m.email == email and m.password == password:
-                return {"manager id": m.manager_id}, 200
+                return {"manager_id": m.manager_id}, 200
         return {"message": "email or password was wrong"}, 404
 
 
@@ -41,4 +41,4 @@ class ManagerRegister(Resource):
         manager = Manager(email=email, password=password, manager_id=manager_id, manager_name=manager_name)
         manager.save()
 
-        return mlab.item2json(manager)
+        return manager.get_json(), 200
