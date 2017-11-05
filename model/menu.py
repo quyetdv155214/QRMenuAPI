@@ -23,7 +23,7 @@ class Menu(Document):
         oid = str["_id"]["$oid"]
         return {
             "id_data": oid,
-            "manager_id": self.res_id,
+            "manager_id": self.manager_id,
             "menu_id": self.menu_id,
             "menu_name": self.menu_name,
             "date_create": self.date_create,
