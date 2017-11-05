@@ -53,7 +53,7 @@ class ItemRes(Resource):
                 return {"message": "Item id exited"}, 400
 
         item = Item(menu_id=menu_id, cate_id=cate_id, item_id=item_id, item_name=item_name, item_price=item_price,
-                    item_desc=item_desc, item_info=item_info,item_old_price=0,
+                    item_desc=item_desc, item_info=item_info, item_old_price=0,
                     item_images_url=item_images_url)
         item.save()
 
@@ -151,3 +151,10 @@ class ItemWithMenuId(Resource):
     def get(self, menu_id):
         items = Item.objects(menu_id=menu_id)
         return mlab.list2json(items)
+
+
+class GetItemWithCateID(Resource):
+    def get(self, cate_id):
+        item = Item.objects(cate_id=cate_id)
+
+        return mlab.list2json(item)

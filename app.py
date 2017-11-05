@@ -39,6 +39,7 @@ api.add_resource(ItemWithMenuId, "/item_menu/<menu_id>")
 api.add_resource(ViewCount, "/itemview/<item_id>")
 api.add_resource(ManagerLogin, "/mlogin")
 api.add_resource(ManagerRegister, "/mRegister")
+api.add_resource(GetItemWithCateID, "/item_with_cateid/<cate_id>")
 
 
 
