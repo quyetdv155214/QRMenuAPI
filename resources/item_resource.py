@@ -38,7 +38,7 @@ class ItemRes(Resource):
         item_price = body["item_price"]
         # item_discount = body["item_discount"]
         item_desc = body["item_desc"]
-        item_images_url = body["item_images_url"]
+        item_images_url = []
         item_info = body["item_info"]
         listImage = ["http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201423/bigstar_6281.png&zc=1",
                      "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/tom-b_8200.png&zc=1",
