@@ -134,8 +134,29 @@ class MenuWithMangerID(Resource):
     # get all menu with res id
 
     def get(self, manager_id):
-        menus = Menu.objects(manager_id=manager_id)
-        return mlab.list2json(menus), 200
+
+        try:
+            menu = Menu.objects(manager_id=manager_id).first()
+            categories = Categoty.objects(menu_id=menu.menu_id)
+            # items = Item.objects(menu_id=menu_id)
+            items = Item.objects(menu_id=menu.menu_id)
+
+            # temp_cates =[]
+
+            for cate in categories:
+                for item in items:
+                    if item.cate_id == cate.cate_id:
+                        cate.items.append(item)
+
+            menu.categories = categories
+
+            # menu.items = items
+
+        except Exception:
+            mess = {"message": "menu id not exit"}
+            return RespHandle.get_resp(mess=mess, code=204)
+
+        return menu.get_json()
 
     # del all menu with res id
 
