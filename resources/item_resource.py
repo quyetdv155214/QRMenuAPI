@@ -125,26 +125,18 @@ class ItemWithID(Resource):
 
 
 class ViewCount(Resource):
-    def put(self, item_id):
+    def get(self, item_id):
         try:
             item = Item.objects(item_id=item_id).first()
         except Exception:
             return {"message": "Item id not exit"}, 400
-
         if item is None:
             return {"message": "Item id not exit"}, 400
 
-        parser = reqparse.RequestParser()
-        parser.add_argument(name="value", type=int, location='json')
-
-        body = parser.parse_args()
-
-        value = body["value"]
-
-        new_view = item.item_view_count + value
+        new_view = item.item_view_count + 1
 
         item.update(set__item_view_count=new_view)
-        return {"message": "update view count"}, 200
+        return {"view_count": new_view}, 200
 
 
 class ItemWithMenuId(Resource):
