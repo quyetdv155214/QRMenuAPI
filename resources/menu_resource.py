@@ -153,7 +153,7 @@ class MenuWithMangerID(Resource):
             # menu.items = items
 
         except Exception:
-            mess = {"message": "menu id not exit"}
+            mess = {"message": "manager not has any menu"}
             return RespHandle.get_resp(mess=mess, code=204)
 
         return menu.get_json()
