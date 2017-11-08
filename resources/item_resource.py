@@ -121,7 +121,26 @@ class ItemWithID(Resource):
         # item_discount = body["item_discount"]
         item_desc = body["item_desc"]
         item_info = body["item_info"]
-        item_images_url = body["item_images_url"]
+        item_images_url =[]
+        # item_images_url = body["item_images_url"]
+        listImage = ["http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201423/bigstar_6281.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/tom-b_8200.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201635/1a_7975.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/chicken-ball-rice_1604.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201424/soup_7846.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201635/4a_858.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/pho-mai-que_5719.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/gavien_6350.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201710/hash-brown-n_9432.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/hot-pie-_7269.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/kem-ly-b_4978.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/kem-cay_4637.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/corn-salad---2_8590.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201422/soy-bean-chicken-rice_2175.png&zc=1",
+                     "http://www.lotteria.vn/resize.php?w=250&h=250&src=data/201640/lotteria---ga-sot---set_5668.png&zc=1"]
+        item_images_url.append(listImage[random.randint(0, 14)])
+        item_images_url.append(listImage[random.randint(0, 14)])
+        item_images_url.append(listImage[random.randint(0, 14)])
 
         item.update(set__menu_id=menu_id, set__cate_id=cate_id, set__item_name=item_name, set__item_price=item_price,
                     set__item_old_price=item_old_price, set__item_info=item_info,
