@@ -37,8 +37,11 @@ class ManagerRegister(Resource):
         password = body["password"]
         manager_id = body["manager_id"]
         manager_name = body["manager_id"]
+        cr_managers = Manager.objects()
 
-
+        for m in cr_managers:
+            if m.email == email:
+                return {"message": "Email has exit"}, 400
 
         manager = Manager(email=email, password=password, manager_id=manager_id, manager_name=manager_name)
         manager.save()
